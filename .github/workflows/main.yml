@@ -16,6 +16,6 @@ jobs:
        run: vitest run
   build:
     runs-on: ubuntu-latest
-     steps:
+    steps:
         - name: build the code
           run: vite build
