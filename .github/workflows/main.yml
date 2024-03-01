@@ -4,8 +4,6 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-       - name: get code test
-         uses: action/checkout@v3
        - name: run lint
          run: eslint --ext .jsx --fix sr
   test:
