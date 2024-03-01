@@ -9,7 +9,7 @@ jobs:
        - name: run lint
          run: eslint --ext .jsx --fix sr
   test:
-  needs: lint
+    needs: lint
     runs-on: ubuntu-latest
     steps:
      - name: test the code
@@ -17,5 +17,5 @@ jobs:
   build:
     runs-on: ubuntu-latest
      steps:
-        - name: buit the code
+        - name: build the code
           run: vite build
