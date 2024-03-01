@@ -1,0 +1,21 @@
+name: practice workflow
+on: workflow_dispatch
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+       - name: get code test
+         uses: action/checkout@v3
+       - name: run lint
+         run: eslint --ext .jsx --fix sr
+  test:
+  needs: lint
+    runs-on: ubuntu-latest
+    steps:
+     - name: test the code
+       run: vitest run
+  build:
+    runs-on: ubuntu-latest
+     steps:
+        - name: buit the code
+          run: vite build
