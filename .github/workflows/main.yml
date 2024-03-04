@@ -4,16 +4,18 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-       - name: run lint
+       - name: npm run lint
          run: eslint --ext .jsx --fix sr
   test:
     needs: lint
     runs-on: ubuntu-latest
     steps:
      - name: test the code
-       run: vitest run
+       run: npm run test
   build:
     runs-on: ubuntu-latest
     steps:
         - name: build the code
-          run: vite build
+          run: npm run build
+         - name: Deployment
+          echo "Deploying..." 
