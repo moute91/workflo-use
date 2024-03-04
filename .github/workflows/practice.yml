@@ -15,7 +15,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-        - name: build the code
-          run: npm run build
-         - name: Deployment
-           echo "Deploying..." 
+      - name: build the code
+        run: npm run build
+      - name: Deployment
+        echo "Deploying..." 
