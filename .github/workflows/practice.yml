@@ -16,4 +16,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Deployment
-        run: echo "Deploying..." 
+        run: echo "Deploying..."
+      - name: actions/upload-artifact@v4
+        with:
+          name:tacs-artifact
+          path: |
+             package.json
+             index.html
