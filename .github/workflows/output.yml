@@ -6,3 +6,9 @@ jobs:
     steps:
     - name: Output Github context
       run: echo "${{ toJSON(github) }}"
+    - name: actions/upload-artifact@v4
+        with:
+          name:tacs-artifact
+          path: |
+             package.json
+             index.html
