@@ -9,7 +9,5 @@ jobs:
     - name: Uplaod artifact
       uses: actions/upload-artifact@v4
         with:
-          name:tacs-artifact
-          path: |
-             package.json
-             index.html
+          name: tacs-artifact
+          path: path/to/artifact/tacs.txt
