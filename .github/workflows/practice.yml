@@ -20,6 +20,4 @@ jobs:
       - name: actions/upload-artifact@v4
         with:
           name:tacs-artifact
-          path: |
-             package.json
-             index.html
+          path: path/to/artifact/tacs.txt
