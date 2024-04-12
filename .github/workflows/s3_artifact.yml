@@ -21,4 +21,5 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_DEFAULT_REGION: 'your-region' # replace 'your-region' with your S3 bucket region
         run: |
+          ls -la
           aws s3 cp "./13-awscli_1.22.34-1_all.deb" "s3://artifact-tests3/moute"
