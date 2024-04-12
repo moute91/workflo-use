@@ -14,12 +14,16 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y awscli
-
-      - name: Upload artifact to S3
-        env:
+      - name: Configure AWS crdentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_DEFAULT_REGION: 'your-region' # replace 'your-region' with your S3 bucket region
+          AWS_DEFAULT_REGION: ${{ secret.AWS_DEFAULT_REGION }}
+              
+
+      - name: Upload artifact to S3
         run: |
           aws configure
+          ls -la
           aws s3 ls
