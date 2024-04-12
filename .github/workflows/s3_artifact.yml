@@ -21,5 +21,5 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_DEFAULT_REGION: 'your-region' # replace 'your-region' with your S3 bucket region
         run: |
-          ls -la
+          aws configure
           aws s3 ls
