@@ -1,7 +1,7 @@
 name: Upload Artifact to S3
 
 on:
-workflow_dispatch
+  workflow_dispatch:
 
 jobs:
   upload_artifact:
