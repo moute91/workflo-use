@@ -22,4 +22,4 @@ jobs:
           AWS_DEFAULT_REGION: 'your-region' # replace 'your-region' with your S3 bucket region
         run: |
           ls -la
-          aws s3 cp "package-lock.json" "s3://artifact-tests3/moute"
+          aws s3 ls
