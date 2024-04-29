@@ -1,48 +1,13 @@
 name: Output information
-on: 
-  workflow_dispatch:
-    inputs:
-        file:
-            type: string
-            description:  'path to the deploy guide file underneath doc/deploy_guides folder(e.g 2023.3.0.md)'
-        product_version:
-          type: string
-          description:  'Product/Service version (e.g 2023.3.3)'
-        deployed_by:
-          type: string
-          description:  'who deployed (e.g. ctemouatchonke)'
-        environment:
-          type: string
-          description:  'environment (e.g. validation)'
-        commit:
-          type: string
-          description:  'commit hash (e.g. 1234567890)' 
-     
+on: workflow_dispatch
 jobs:
   Infos:
     runs-on: ubuntu-latest
-    container:
-        image: pandoc/latex:latest
-    env:
-        INPUT_FILE:       ${{ github.event.inputs.file || '2023.3.3.md'}}
-        DEPLOYED_BY:      ${{ github.event.inputs.deployed_by || 'ctemouatchonke'}}
-        ENVIRONMENT:      ${{ github.event.inputs.environment || 'validation'}}
-        PRODUCT_VERSION:  ${{ github.event.inputs.product_version || '2023.3.3'}}                   
-        COMMIT:           ${{ github.event.inputs.commit || '8f4a899684a2229d7aaa0ec5dac46a5aead8804d'}} 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '14'
-      - name: Generate PDF
-        run: |
-          pandoc -s -o tacs.pdf src/text.md -V geometry:margin=0.15in
-
-      - name: Upload PDF artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: PDF
-          path: tacs.pdf  # Change this if you customized the output file name
+    - name: convert file to pdf 
+      run: pandoc -s -o moute.pdf text.md -V geometry:margin=0.15in
+    - name: Uplaod artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: tacs-artifact
+        path: moute.pdf
