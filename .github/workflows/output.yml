@@ -4,12 +4,10 @@ jobs:
   Infos:
     runs-on: ubuntu-latest
     steps:
-    - name: Output Github context
-      run: echo "${{ toJSON(github) }}"
+    - name: convert file to pdf 
+      run: pandoc -s -o moute.pdf index.html -V geometry:margin=0.15in
     - name: Uplaod artifact
       uses: actions/upload-artifact@v4
         with:
           name: tacs-artifact
-          path: |
-            src
-            public
+          path: moute.pdf
