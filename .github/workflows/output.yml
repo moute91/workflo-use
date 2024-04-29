@@ -7,7 +7,7 @@ jobs:
         image: pandoc/latex:latest
     steps:
     - name: convert file to pdf 
-      run: pandoc -s -o moute.pdf 2023.3.3.md -V geometry:margin=0.15in
+      run: pandoc -s -o moute.pdf src/text.md -V geometry:margin=0.15in
     - name: Uplaod artifact
       uses: actions/upload-artifact@v4
       with:
