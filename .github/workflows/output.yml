@@ -39,7 +39,7 @@ jobs:
           node-version: '14'
       - name: Generate PDF
         run: |
-          pandoc -s -o tacs.pdf src/2023.3.3.md -V geometry:margin=0.15in
+          pandoc -s -o tacs.pdf src/text.md -V geometry:margin=0.15in
 
       - name: Upload PDF artifact
         uses: actions/upload-artifact@v2
