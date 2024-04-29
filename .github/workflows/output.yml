@@ -1,15 +1,54 @@
 name: Output information
-on: workflow_dispatch
+on: 
+  workflow_dispatch:
+    inputs:
+        file:
+            type: string
+            description:  'path to the deploy guide file underneath doc/deploy_guides folder(e.g 2023.3.0.md)'
+        product_version:
+          type: string
+          description:  'Product/Service version (e.g 2023.3.3)'
+        deployed_by:
+          type: string
+          description:  'who deployed (e.g. ctemouatchonke)'
+        environment:
+          type: string
+          description:  'environment (e.g. validation)'
+        commit:
+          type: string
+          description:  'commit hash (e.g. 1234567890)' 
+     
 jobs:
   Infos:
     runs-on: ubuntu-latest
     container:
         image: pandoc/latex:latest
+    env:
+        INPUT_FILE:       ${{ github.event.inputs.file || '2023.3.3.md'}}
+        DEPLOYED_BY:      ${{ github.event.inputs.deployed_by || 'ctemouatchonke'}}
+        ENVIRONMENT:      ${{ github.event.inputs.environment || 'validation'}}
+        PRODUCT_VERSION:  ${{ github.event.inputs.product_version || '2023.3.3'}}                   
+        COMMIT:           ${{ github.event.inputs.commit || '8f4a899684a2229d7aaa0ec5dac46a5aead8804d'}} 
     steps:
-    - name: convert file to pdf 
-      run: pandoc -s -o moute.pdf src/text.md -V geometry:margin=0.15in
-    - name: Uplaod artifact
-      uses: actions/upload-artifact@v4
-      with:
-        name: tacs-artifact
-        path: moute.pdf
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '14'
+      - name: Generate PDF
+        run: |
+          DATE=$(date "+%d-%m-%Y %I:%M:%S %p")
+          sed -i "s/ ##DATE/${DATE}/g" doc/deploy_guides/${{ env.INPUT_FILE }}
+          sed -i 's/ ##ENVIRONMENT/${{env.ENVIRONMENT}}/g' doc/deploy_guides/${{ env.INPUT_FILE }}
+          sed -i 's/ ##DEPLOYED_BY/${{env.DEPLOYED_BY}}/g' doc/deploy_guides/${{ env.INPUT_FILE }}
+          sed -i 's/ ##PRODUCT_VERSION/${{env.PRODUCT_VERSION}}/g' doc/deploy_guides/${{ env.INPUT_FILE }}
+          sed -i 's/ ##COMMIT_HASH/${{env.COMMIT}}/g' doc/deploy_guides/${{ env.INPUT_FILE }}
+          pandoc -s -o pir_cpp_configurations.pdf doc/deploy_guides/${{ env.INPUT_FILE }} -V geometry:margin=0.15in
+
+      - name: Upload PDF artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: PDF
+          path: pir_cpp_configurations.pdf  # Change this if you customized the output file name
