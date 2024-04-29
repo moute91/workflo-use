@@ -45,7 +45,7 @@ jobs:
           sed -i 's/ ##DEPLOYED_BY/${{env.DEPLOYED_BY}}/g' src/${{ env.INPUT_FILE }}
           sed -i 's/ ##PRODUCT_VERSION/${{env.PRODUCT_VERSION}}/g' src/${{ env.INPUT_FILE }}
           sed -i 's/ ##COMMIT_HASH/${{env.COMMIT}}/g' src/${{ env.INPUT_FILE }}
-          pandoc -s -o pir_cpp_configurations.pdf src/${{ env.INPUT_FILE }} -V geometry:margin=0.15in
+          pandoc -s -o tacs.pdf src/${{ env.INPUT_FILE }} -V geometry:margin=0.15in
 
       - name: Upload PDF artifact
         uses: actions/upload-artifact@v2
