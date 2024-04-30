@@ -7,9 +7,9 @@
 
 
 
-| Environment    | Deployed By   |Product version | Date      | 
------------------|---------------|----------------|-----------
-| ##ENVIRONMENT | ##DEPLOYED_BY  |#PRODUCT_VERSION| ##DATE   |
+| Environment    | Deployed By   |Status deployment  | Date      | 
+-----------------|---------------|-------------------|-----------
+| ##ENVIRONMENT | ##DEPLOYED_BY  | ##DEPLOYEMT_STATUS | ##DATE   |
 
 
 |Git|Commit|
