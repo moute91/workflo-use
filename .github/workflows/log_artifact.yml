@@ -23,7 +23,7 @@ on:
           description:  'date (e.g. 12:30pm)'
         PRODUCT_URL: 
           type: string
-          description: 'product url (eg. "N/A(AWS LAMBDA does not have an URL because is a serverless service)"
+          description: 'product url (eg. "N/A(AWS LAMBDA does not have an URL because is a serverless service)'
   
 
 
