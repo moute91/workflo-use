@@ -1,0 +1,24 @@
+name: Store Job Logs as Artifact
+
+on:
+  workflow_dispatch:
+
+
+jobs:
+  store_logs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Run your build/test/deployment steps here
+      # For demonstration purposes, we'll create a dummy log file
+      - name: Generate logs
+        run: echo "This is a log message for tesrting purpose" > mylog.txt
+
+      # Store the log file as an artifact
+      - name: Store logs as artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: my-log-artifact
+          path: mylog.txt
