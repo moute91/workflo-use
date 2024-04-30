@@ -9,7 +9,7 @@
 
 | Environment    | Deployed By   |Status deployment  | Date      | 
 -----------------|---------------|-------------------|-----------
-| ##ENVIRONMENT | ##DEPLOYED_BY  | ##DEPLOYEMT_STATUS | ##DATE   |
+| ##ENVIRONMENT | ##DEPLOYED_BY  | ##DEPLOYMENT_STATUS | ##DATE   |
 
 
 |Git|Commit|
