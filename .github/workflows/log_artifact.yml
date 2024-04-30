@@ -49,6 +49,12 @@ jobs:
 
       - name: Convert Logs to PDF
         run: |
+          DATE=$(date "+%d-%m-%Y %I:%M:%S %p")
+          sed -i "s/ ##DATE/${DATE}/g" mylog.md
+          sed -i 's/ ##ENVIRONMENT/${{env.ENVIRONMENT}}/g' mylog.md
+          sed -i 's/ ##DEPLOYED_BY/${{env.DEPLOYED_BY}}/g' mylog.md
+          sed -i 's/ ##PRODUCT_URL/${{env.PRODUCT_VERSION}}/g' mylog.md
+          sed -i 's/ ##COMMIT_HASH/${{env.COMMIT}}/g' mylog.md
           # Assuming your logs are in markdown format
           pandoc -o Cpp-configs_logs.pdf mylog.md -V geometry:margin=0.15in
 
