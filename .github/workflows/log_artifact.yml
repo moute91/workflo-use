@@ -2,6 +2,29 @@ name: Store Job Logs as Artifact
 
 on:
   workflow_dispatch:
+    inputs:
+        PRODUCT_NAME:
+            type: string
+            description:  'path to the deploy guide file underneath doc/deploy_guides folder(e.g 2023.3.0.md)'
+        DEPLOYMENT_STATUS:
+          type: string
+          description:  'Deployment status (passed)'
+        deployed_by:
+          type: string
+          description:  'who deployed (e.g. ctemouatchonke)'
+        environment:
+          type: string
+          description:  'environment (e.g. validation)'
+        commit:
+          type: string
+          description:  'commit hash (e.g. 1234567890)'
+        date:
+          type: string
+          description:  'date (e.g. 12:30pm)'
+        PRODUCT_URL: 
+          type: string
+          description: 'product url (eg. "N/A(AWS LAMBDA does not have an URL because is a serverless service)"
+  
 
 
 jobs:
