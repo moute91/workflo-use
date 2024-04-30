@@ -5,7 +5,7 @@ on:
     inputs:
         product_version:
             type: string
-            description:  'Product Version(Cpp_configuration)'
+            description:  'Product Version(647839)'
         deployment_status:
           type: string
           description:  'Deployment status (passed)'
@@ -37,7 +37,8 @@ jobs:
         ENVIRONMENT:       ${{ github.event.inputs.environment || 'validation'}}
         DEPLOYMENT_STATUS: ${{ github.event.inputs.deployment_status || 'passed'}}                   
         COMMIT:            ${{ github.event.inputs.commit || '8f4a899684a2229d7aaa0ec5dac46a5aead8804d'}}
-        PRODUCT_VERSION:        ${{ github.event.inputs.product_url || 'N/A'}}
+        PRODUCT_VERSION:   ${{ github.event.inputs.product_version || 'N/A'}}
+      
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
