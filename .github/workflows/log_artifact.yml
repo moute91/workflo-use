@@ -22,7 +22,7 @@ jobs:
       - name: Convert Logs to PDF
         run: |
           # Assuming your logs are in markdown format
-          pandoc -o converted_logs.pdf mylog.md -V geometry:margin=0.15in
+          pandoc -o Cpp-configs_logs.pdf mylog.md -V geometry:margin=0.15in
 
       # Store the log file as an artifact
       - name: Store PDF as Artifact
