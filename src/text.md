@@ -1,5 +1,21 @@
 # PDK Configurations Installation Guide
 
+
+| Product/Service Name               | Product/Service Version  | Proudct URL   | 
+------------------------------------|---------------------------|----------------
+| CPP CONFIGURATON  | ##PRODUCT_VERSION         | N/A(AWS LAMBDA does not have an URL because is a serverless service)          |
+
+
+
+| Environment    | Deployed By        | Date      | 
+-----------------|--------------------|-----------
+| ##ENVIRONMENT | ##DEPLOYED_BY      | ##DATE   |
+
+
+|Git|Commit|
+|---|------|
+|https://github.com/mdsol/cpp-configurations.git | ##COMMIT_HASH |
+
 ## Summary
 
 PDK Configurations is a cloud-native serverless solution which relies on the following AWS services to publish the configurations at the time of deployment and at runtime:
