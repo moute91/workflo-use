@@ -3,7 +3,7 @@
 
 | Product/Service Name               | Product/Service Version  | Proudct URL   | 
 ------------------------------------|---------------------------|----------------
-| CPP CONFIGURATON  | ##PRODUCT_VERSION         | N/A(AWS LAMBDA does not have an URL because is a serverless service)          |
+| CPP CONFIGURATON  | ##PRODUCT_VERSION         | ##PRODUCT_URL          |
 
 
 
