@@ -3,10 +3,10 @@ name: Store Job Logs as Artifact
 on:
   workflow_dispatch:
     inputs:
-        PRODUCT_NAME:
+        product_name:
             type: string
             description:  'Product Name(Cpp_configuration)'
-        DEPLOYMENT_STATUS:
+        deployment_status:
           type: string
           description:  'Deployment status (passed)'
         deployed_by:
@@ -18,10 +18,7 @@ on:
         commit:
           type: string
           description:  'commit hash (e.g. 1234567890)'
-        date:
-          type: string
-          description:  'date (e.g. 12:30pm)'
-        PRODUCT_URL: 
+        product_url: 
           type: string
           description: 'product url (eg. "N/A(AWS LAMBDA does not have an URL because is a serverless service)'
   
@@ -33,6 +30,14 @@ jobs:
 
     container:
         image: pandoc/latex:latest
+
+    env:
+        INPUT_FILE:        ${{ github.event.inputs.product_name || '2023.3.3.md'}}
+        DEPLOYED_BY:       ${{ github.event.inputs.deployed_by || 'ctemouatchonke'}}
+        ENVIRONMENT:       ${{ github.event.inputs.environment || 'validation'}}
+        DEPLOYMENT_STATUS: ${{ github.event.inputs.deployment_status || 'passed'}}                   
+        COMMIT:            ${{ github.event.inputs.commit || '8f4a899684a2229d7aaa0ec5dac46a5aead8804d'}}
+        PRODUCT_URL:        ${{ github.event.inputs.product_url || 'N/A'}}
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
