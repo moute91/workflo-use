@@ -57,7 +57,7 @@ jobs:
           sed -i 's/ ##PRODUCT_VERSION/${{env.PRODUCT_VERSION}}/g' mylog.md
           sed -i 's/ ##COMMIT_HASH/${{env.COMMIT}}/g' mylog.md
           sed -i 's/ ##DEPLOYMENT_STATUS/${{env.DEPLOYMENT_STATUS}}/g' mylog.md
-          sed -i 's/ ##PRODUCT_URL/${{env.DEPLOYMENT_URL}}/g' mylog.md 
+          sed -i 's/ ##PRODUCT_URL/${{env.PRODUCT_URL}}/g' mylog.md 
           # Assuming your logs are in markdown format
           pandoc -o Cpp-configs_logs.pdf mylog.md -V geometry:margin=0.15in
 
