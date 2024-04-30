@@ -5,7 +5,7 @@ on:
     inputs:
         PRODUCT_NAME:
             type: string
-            description:  'path to the deploy guide file underneath doc/deploy_guides folder(e.g 2023.3.0.md)'
+            description:  'Product Name(Cpp_configuration)'
         DEPLOYMENT_STATUS:
           type: string
           description:  'Deployment status (passed)'
