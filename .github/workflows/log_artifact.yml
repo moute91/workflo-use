@@ -67,6 +67,3 @@ jobs:
         with:
           name: converted_logs
           path: Cpp-configs_logs.pdf
-
-      - name: get the logs from the run  
-        run: gh run download 24448570583
