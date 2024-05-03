@@ -55,7 +55,7 @@ echo "<tr><td>Environment</td><td>$ENVIRONMENT</td></tr>"                       
 echo "<tr><td>Commit/Git Ref</td><td>$COMMIT</td></tr>"                                                   >> $IR_HTML
 echo "<tr><td>Deployment Log</td><td>"                                                            >> $IR_HTML
 
-cat ../scr/text.md | while read oneline
+cat ../src/text.md | while read oneline
 do
    echo "${oneline}<br>" >> $IR_HTML
 done
