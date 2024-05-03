@@ -21,8 +21,9 @@ jobs:
       - name: Generate logs
         run: cp -rf src/text.md mylog.md
 
-      - name: Convert Logs to PDF
-        run: bash ./irgeneratortext.sh
+      - name: Convert Logs to PDF 
+        shell: bash 
+        run: ./irgeneratortext.sh
 
       # Store the log file as an artifact
       - name: Store PDF as Artifact
