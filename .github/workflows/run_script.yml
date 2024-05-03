@@ -23,7 +23,7 @@ jobs:
 
       - name: Convert Logs to PDF 
         shell: bash 
-        run: ./irgeneratortext.sh
+        run: ./src/irgeneratortext.sh
 
       # Store the log file as an artifact
       - name: Store PDF as Artifact
