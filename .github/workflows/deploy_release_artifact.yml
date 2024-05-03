@@ -1,0 +1,90 @@
+name: "Deploy release artifacts from artifactory for CVRI in MDSO"
+
+permissions:
+  contents: read
+
+on:
+  workflow_dispatch:
+    inputs:
+      jira_ticket:
+        description: 'Jira ticket number (e.g. MDSO-19142)'
+        required: true
+
+      environment:
+        description: 'Environment'
+        type: choice
+        required: true
+        options:
+          - Production
+          - Innovate
+          - Validation
+
+      cvri:
+        description: 'CVRI to be deployed (e.g. z_pdk_PDK Product Testing 2024.1.0)'
+        required: false
+
+jobs:
+  deploy:
+    runs-on: self-hosted 
+    environment: ${{ github.event.inputs.environment }}
+
+    env:
+      JIRA_TOKEN: ${{ secrets.JIRA_TOKEN }}
+      PDK_CONFIG_PROD_ARTIFACTORY_USERNAME: ${{ vars.PDK_CONFIG_PROD_ARTIFACTORY_USERNAME }}
+      PDK_CONFIG_PROD_ARTIFACTORY_TOKEN: ${{ secrets.PDK_CONFIG_PROD_ARTIFACTORY_TOKEN }}
+      PDK_CONFIG_PROD_REPO_NAME: ${{ vars.PDK_CONFIG_PROD_REPO_NAME }}
+      PDK_CONFIG_PREPROD_ARTIFACTORY_USERNAME: ${{ vars.PDK_CONFIG_PREPROD_ARTIFACTORY_USERNAME }}
+      PDK_CONFIG_PREPROD_ARTIFACTORY_TOKEN: ${{ secrets.PDK_CONFIG_PREPROD_ARTIFACTORY_TOKEN }}
+      PDK_CONFIG_PREPROD_REPO_NAME: ${{ vars.PDK_CONFIG_PREPROD_REPO_NAME }}
+      ARTIFACTORY_URL: ${{ vars.ARTIFACTORY_URL }}
+      MAUTH_APP_ID: ${{ vars.PDK_MAUTH_APP_ID }}
+      DATA_API_URL: ${{ vars.DATA_API_URL }}
+      GATEWAY_S3_BUCKET: ${{ vars.GATEWAY_S3_BUCKET }}
+      UI_URL: ${{ vars.UI_URL }}
+      V3_API_URL: ${{ vars.V3_API_URL }}
+      V3_CLIENT_ID: ${{ vars.V3_CLIENT_ID }}
+      ENV_NAME: ${{ github.event.inputs.environment }}
+      IS_DRY_RUN: "false"
+      MAUTH_PRIVATE_KEY: ${{ secrets.PDK_MAUTH_PRIVATE_KEY }}
+
+    steps:
+      - name: Checkout repository 
+        uses: actions/checkout@v4
+  
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+  
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests  # Install the 'requests' module
+          pip install dohq-artifactory --upgrade  # Install the 'artifactory' module
+          pip install ansible-runner # Install the module for executing ansible playbooks
+          pip install boto3 # Install 'boto3' module
+          pip install checksumdir # Calculate the checksum for the artifact directory
+  
+      - name: Set up AWS CLI
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+            aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+            aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+            aws-region: us-east-1
+
+      - name: Run script
+        id: run_script
+        run: | 
+          python scripts/workflow/deploy_release_artifacts.py \
+          -jira_ticket "${{ github.event.inputs.jira_ticket }}" \
+          -cvri "${{ github.event.inputs.cvri }}"
+
+      - name: Post to a Slack channel
+        if: steps.run_script.outputs.exit_code == 0
+        uses: slackapi/slack-github-action@v1.25.0
+        with:
+          # This send a notification to pdk-deploys channel.
+          channel-id: 'pdk-deploys'
+          slack-message: "GitHub build result for ${{ github.event.inputs.environment }} release and deploy pipeline: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.GHA_BOT_TOKEN }}    
