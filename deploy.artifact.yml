@@ -1,0 +1,33 @@
+import argparse
+from jira_ops import JiraOps
+from release_ops import ReleaseOps
+
+
+#
+# entry point
+#
+def main():
+    parser = argparse.ArgumentParser(description="Trigger a GitHub Actions workflow to deploy configurations lambda and product configs.")
+    parser.add_argument("-jira_ticket", required=True, help="Jira ticket to get product data from (e.g. MDSO-19142)")
+    parser.add_argument("-cvri", required=False, help="CVRI for which to get product data from (z_pdk_PDK Product Testing 2024.1.0)")
+    
+    args = parser.parse_args()
+
+    jira_ops = JiraOps()
+    release_ops = ReleaseOps()
+
+    # Get product data from Jira
+    jira_data = jira_ops.get_jira_product_data(args.jira_ticket)
+    if jira_data:
+        # Deploy release artifact for the configurations lambda if the CVRI is in the release
+        config_lambda_metadata = jira_ops.get_metadata_from_cvris(jira_data, "z_CPP_Configuration", args.cvri)
+        release_ops.deploy_lambda(config_lambda_metadata)
+
+        # Upload the products configs from the MDSO ticket
+        pdk_products = jira_ops.get_metadata_from_cvris(jira_data, "pdk_", args.cvri)
+        pdk_products.extend(jira_ops.get_metadata_from_cvris(jira_data, "z_pdk_", args.cvri))
+        release_ops.deploy_product_configs(pdk_products)
+        
+            
+if __name__ == "__main__":
+    main()
