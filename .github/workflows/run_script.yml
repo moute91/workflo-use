@@ -1,0 +1,35 @@
+name: run script
+
+on:
+  workflow_dispatch:
+    
+
+jobs:
+  store_logs:
+    runs-on: ubuntu-latest
+
+    container:
+        image: pandoc/latex:latest
+
+   
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Run your build/test/deployment steps here
+      # For demonstration purposes, we'll create a dummy log file
+      - name: Generate logs
+        run: cp -rf src/text.md mylog.md
+
+      - name: Convert Logs to PDF
+        run: bash irgeneratortext.sh
+
+      # Store the log file as an artifact
+      - name: Store PDF as Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: converted_logs
+          path: Cpp-configs_logs.pdf
+
+      - name: Download the logs
+        run: gh run echo "lookup dor the logs" 
