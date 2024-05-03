@@ -22,7 +22,7 @@ jobs:
         run: cp -rf src/text.md mylog.md
 
       - name: Convert Logs to PDF
-        run: bash irgeneratortext.sh
+        run: bash ./irgeneratortext.sh
 
       # Store the log file as an artifact
       - name: Store PDF as Artifact
