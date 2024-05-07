@@ -1,4 +1,4 @@
-##PRODUCT_NAME    ##PRODUCT_VERSION  deployment Doc.
+# CHIP    ##PRODUCT_VERSION  deployment Doc.
 
 | PDK Config Product Name               | PDK Config Product Service Version  |  Release Tag    
 ------------------------------------|---------------------------|-----------------|---------------|
