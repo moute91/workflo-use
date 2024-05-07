@@ -58,10 +58,10 @@ jobs:
           sed -i 's/ ##COMMIT_HASH/${{env.COMMIT}}/g' src/${{ env.INPUT_FILE }}
           sed -i 's/ ##GIT_TAG/${{env.GIT_TAG}}/g' src/${{ env.INPUT_FILE }}
           sed -i 's/ ##PRODUCT_NAME/${{env.PRODUCT_NAME}}/g' src/${{ env.INPUT_FILE }}
-          pandoc -o  pir_${{ env.PRODUCT_NAME }}.pdf src/${{ env.INPUT_FILE }} -V geometry:margin=0.15in
+          pandoc -o  pir_PDK_Testing.pdf src/${{ env.INPUT_FILE }} -V geometry:margin=0.15in
 
       - name: Upload PDF artifact
         uses: actions/upload-artifact@v2
         with:
           name: PDF
-          path: pir_PDK-Testing.pdf  # Change this if you customized the output file name
+          path: pir_PDK_Testing.pdf  # Change this if you customized the output file name
