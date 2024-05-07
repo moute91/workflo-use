@@ -1,16 +1,17 @@
-##PRODUCT_NAME    ##PRODUCT_VERSION  deployment Doc.
+Z_##PRODUCT_NAME    ##PRODUCT_VERSION  deployment Doc.
 
 | PDK Config Product Name               | PDK Config Product Service Version  | 
 ------------------------------------|---------------------------|
-| ##PRODUCT_NAME | ##PRODUCT_VERSION         |
+| Z_##PRODUCT_NAME | ##PRODUCT_VERSION         |
 
 
 
 | Environment    | Deployed By        | Date      | 
 -----------------|--------------------|-----------
-| ##ENVIRONMENT | ##DEPLOYED_BY      | ##DATE   |
-
-
-|Git     |Commit|Release Tag        |
-|--------|------|-------------------|
-|https://github.com/mdsol/cpp-configurations.git  |  ##COMMIT_HASH  |        ##GIT_TAG
+| ##ENVIRONMENT | ##DEPLOYED_BY       | ##DATE   |
+                     |Release Tag    |
+                     |---------------|
+                     |  ##GIT_TAG    |
+|Git     |Commit|
+|--------|------|
+|https://github.com/mdsol/cpp-configurations.git  |  ##COMMIT_HASH |
