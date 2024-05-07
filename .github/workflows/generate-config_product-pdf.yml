@@ -64,4 +64,4 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: PDF
-          path: pir_${{ env.PRODUCT_NAME }}.pdf  # Change this if you customized the output file name
+          path: pir_PDK-Testing.pdf  # Change this if you customized the output file name
