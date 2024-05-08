@@ -1,5 +1,7 @@
 name: Generate PRODUCTS PIR Document
 
+run-name: Create PIR for ${{ github.event.inputs.product_name}} by @${{ github.actor }}
+
 on:
   workflow_dispatch:
     inputs:
@@ -66,6 +68,6 @@ jobs:
         with:
           name: PDF
           path: pir_PDK_Testing.pdf  # Change this if you customized the output file name
-      run-name: Create PIR for ${{ github.event.inputs.product_name}} by @${{ github.actor }}
+      
       
 
