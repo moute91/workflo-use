@@ -34,7 +34,7 @@ jobs:
 
     env:
         INPUT_FILE:       ${{ github.event.inputs.file || 'configs_product.md'}}
-        DEPLOYED_BY:      ${{ github.event.inputs.deployed_by || 'ctemouatchonke'}}
+        DEPLOYED_BY:      ${{ github.event.inputs.deployed_by || '@${{ github.actor }}'}}
         ENVIRONMENT:      ${{ github.event.inputs.environment || 'validation'}}
         PRODUCT_VERSION:  ${{ github.event.inputs.product_version || '2023.3.3'}}                   
         COMMIT:           ${{ github.event.inputs.commit || '8f4a899684a2229d7aaa0ec5dac46a5aead8804d'}}    
@@ -67,23 +67,4 @@ jobs:
           name: PDF
           path: pir_PDK_Testing.pdf  # Change this if you customized the output file name
 
-  generate_pir:
-    runs-on: ubuntu-latest
-    # if: ${{ github.event.inputs.dry_run != true }}
-    container:
-      image: pandoc/latex:latest
 
-    needs: [build]
-    strategy:
-        matrix: ${{ fromJson(needs.build.outputs.matrix) }}
-    steps:
-      - name: Generate PIR for Lambda
-        run:
-          echo "Generating PIR for Lambda"
-          echo "${{ matrix.name }}""
-
-      - name: Generate PIR for Product
-        run:
-          echo "Generating PIR for configs"
-
-      
