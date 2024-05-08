@@ -27,7 +27,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
+    outputs:
+      matrix: ${{ steps.build_and_upload.outputs.value }}
     container:
         image: pandoc/latex:latest
 
@@ -65,3 +66,24 @@ jobs:
         with:
           name: PDF
           path: pir_PDK_Testing.pdf  # Change this if you customized the output file name
+
+generate_pir:
+    runs-on: ubuntu-latest
+    # if: ${{ github.event.inputs.dry_run != true }}
+    container:
+      image: pandoc/latex:latest
+
+    needs: [build]
+    strategy:
+        matrix: ${{ fromJson(needs.build.outputs.matrix) }}
+    steps:
+      - name: Generate PIR for Lambda
+        run:
+          echo "Generating PIR for Lambda"
+          echo "${{ matrix.name }}""
+
+      - name: Generate PIR for Product
+        run:
+          echo "Generating PIR for configs"
+
+      
