@@ -67,7 +67,7 @@ jobs:
           name: PDF
           path: pir_PDK_Testing.pdf  # Change this if you customized the output file name
 
-generate_pir:
+  generate_pir:
     runs-on: ubuntu-latest
     # if: ${{ github.event.inputs.dry_run != true }}
     container:
