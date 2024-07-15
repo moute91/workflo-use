@@ -1,15 +1,17 @@
 name: Test project
 on: workflow_dispatch
 jobs: 
-  test:
+  npm project:
     runs-on: ubuntu-latest
     steps: 
       - name: Get code
-        uses: action/checkout@v3
+        uses: action/checkout@v4
+
       - name: Install node-version
         uses: action/setup-node@v3   
         with:
           node-version: 18
+          
       - name: Install dependency    
         run: npm ci
       - name: Run test    
