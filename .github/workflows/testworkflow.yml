@@ -1,7 +1,7 @@
 name: Test project
 on: workflow_dispatch
 jobs: 
-  npm project:
+  npmproject:
     runs-on: ubuntu-latest
     steps: 
       - name: Get code
